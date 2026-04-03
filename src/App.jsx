@@ -1,15 +1,26 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleRole } from './redux/uiSlice'
+import Dashboard from './pages/Dashboard'
+import Insights from './pages/Insights'
+import Transactions from './pages/Transactions'
 
 const links = ['Dashboard', 'Transactions', 'Insights']
 
 function App() {
   const dispatch = useDispatch()
   const role = useSelector((state) => state.ui.role)
+  const [activePage, setActivePage] = useState('Dashboard')
+
+  const pageContent = {
+    Dashboard: <Dashboard />,
+    Transactions: <Transactions />,
+    Insights: <Insights />,
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col md:flex-row">
+      <div className="mx-auto flex min-h-screen flex-col md:flex-row">
         <aside className="border-b border-slate-200 bg-slate-900 px-6 py-6 text-slate-100 md:w-64 md:border-b-0 md:border-r">
           <div className="mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
@@ -19,18 +30,19 @@ function App() {
           </div>
 
           <nav className="flex flex-col gap-2">
-            {links.map((link, index) => (
-              <a
+            {links.map((link) => (
+              <button
                 key={link}
-                href="#"
+                type="button"
+                onClick={() => setActivePage(link)}
                 className={`rounded-lg px-4 py-3 text-sm font-medium transition ${
-                  index === 0
+                  activePage === link
                     ? 'bg-emerald-400 text-slate-950'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                 }`}
               >
                 {link}
-              </a>
+              </button>
             ))}
           </nav>
         </aside>
@@ -54,19 +66,7 @@ function App() {
           </header>
 
           <section className="px-6 py-8">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <p className="text-sm font-medium text-slate-500">
-                Welcome back
-              </p>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">
-                Your finance dashboard is ready.
-              </h3>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-                This layout gives you a clean starting point for adding summary
-                cards, charts, and transaction tables without extra UI
-                complexity.
-              </p>
-            </div>
+            {pageContent[activePage]}
           </section>
         </main>
       </div>
