@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+export const uiInitialState = {
   role: 'viewer',
   filters: {
     search: '',
@@ -10,7 +10,7 @@ const initialState = {
 
 const uiSlice = createSlice({
   name: 'ui',
-  initialState,
+  initialState: uiInitialState,
   reducers: {
     toggleRole: (state) => {
       state.role = state.role === 'viewer' ? 'admin' : 'viewer'
@@ -22,7 +22,7 @@ const uiSlice = createSlice({
       }
     },
     resetFilters: (state) => {
-      state.filters = initialState.filters
+      state.filters = uiInitialState.filters
     },
   },
 })

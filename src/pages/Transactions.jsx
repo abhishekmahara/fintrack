@@ -63,9 +63,9 @@ function Transactions() {
   }
 
   return (
-    <section className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
+    <section className="min-w-0 space-y-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
           Transactions
         </h1>
         <p className="mt-3 text-base text-slate-600">
@@ -73,7 +73,7 @@ function Transactions() {
         </p>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-xl font-semibold text-slate-900">
@@ -166,7 +166,7 @@ function Transactions() {
         </form>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-end">
           <div className="flex-1">
             <label
@@ -217,25 +217,25 @@ function Transactions() {
           </button>
         </div>
 
-        <div className="mt-6 overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200 text-left">
+        <div className="-mx-5 mt-6 overflow-x-auto px-5 sm:-mx-6 sm:px-6">
+          <table className="min-w-[40rem] divide-y divide-slate-200 text-left">
             <thead>
               <tr className="text-sm text-slate-500">
-                <th className="pb-3 font-medium">Date</th>
-                <th className="pb-3 font-medium">Amount</th>
-                <th className="pb-3 font-medium">Category</th>
+                <th className="pb-3 pr-6 font-medium">Date</th>
+                <th className="pb-3 pr-6 font-medium">Amount</th>
+                <th className="pb-3 pr-6 font-medium">Category</th>
                 <th className="pb-3 font-medium">Type</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {filteredTransactions.map((transaction) => (
                 <tr key={transaction.id} className="text-sm text-slate-700">
-                  <td className="py-4">{transaction.date}</td>
-                  <td className="py-4 font-medium text-slate-900">
+                  <td className="py-4 pr-6 whitespace-nowrap">{transaction.date}</td>
+                  <td className="py-4 pr-6 whitespace-nowrap font-medium text-slate-900">
                     {formatCurrency(transaction.amount)}
                   </td>
-                  <td className="py-4">{transaction.category}</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-6">{transaction.category}</td>
+                  <td className="py-4 whitespace-nowrap">
                     <span
                       className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
                         transaction.type === 'credit'

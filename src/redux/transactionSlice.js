@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { transactions } from '../data/transactions'
 
+export const transactionInitialState = transactions
+
 const transactionSlice = createSlice({
   name: 'transactions',
-  initialState: transactions,
+  initialState: transactionInitialState,
   reducers: {
     addTransaction: (state, action) => {
       state.unshift({
